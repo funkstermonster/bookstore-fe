@@ -1,13 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { HttpService } from './services/http.service';
+import { Observable } from 'rxjs';
+import { Book } from './models/book';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent, FooterComponent, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'bookstore-fe';
+
+  books$: Observable<Book[]> = new Observable<Book[]>;
+  constructor(private httpService: HttpService) {}
+
+  ngOnInit(): void {
+    this.books$ = this.httpService.getBooks();
+  }
 }
