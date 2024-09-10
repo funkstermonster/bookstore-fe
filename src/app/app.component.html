@@ -1,16 +1,5 @@
 <app-header></app-header>
 
-<div *ngIf="books$ | async as books; else loading">
-  <h2>Book List</h2>
-  <ul>
-    <li *ngFor="let book of books">
-      <strong>{{ book.title }}</strong> by {{ book.author }} - {{ book.price | currency }}
-    </li>
-  </ul>
-</div>
-
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>
+<router-outlet></router-outlet>
 
 <app-footer></app-footer>
