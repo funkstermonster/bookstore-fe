@@ -22,23 +22,23 @@
     }
   }
 
-  .nav {
-    ul {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-      cursor: pointer;
+  .nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+ }
+ 
+ li a {
+    cursor: pointer; /* Move cursor here */
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
 
-      li a {
-        color: white;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        &:hover {
-          background-color: #34495e;
-          border-radius: 5px;
-        }
-      }
+    &:hover {
+      color: #f39c12;
     }
+ }
+ 
 
     // Hide the navigation on smaller screens
     @media (max-width: 768px) {
@@ -78,4 +78,4 @@
       display: flex;
     }
   }
-}
+
