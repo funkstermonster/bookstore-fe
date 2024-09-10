@@ -4,6 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Routes } from '@angular/router';
 import { BooksOverviewComponent } from './components/books-overview/books-overview.component';
 import { HomeComponent } from './components/home/home.component';
+import { provideToastr } from 'ngx-toastr';
 
 export const router: Routes = [
   { path: "home", component: HomeComponent },
@@ -11,5 +12,5 @@ export const router: Routes = [
   { path: "**", redirectTo: "home", pathMatch: 'full' }
 ];
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(router), provideAnimations(), provideHttpClient(), ],
+  providers: [provideRouter(router), provideAnimations(), provideHttpClient(), provideToastr()],
 };
