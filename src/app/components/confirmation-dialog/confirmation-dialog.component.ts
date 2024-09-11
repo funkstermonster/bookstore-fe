@@ -13,14 +13,14 @@ import { ConfirmDialogData } from 'src/app/models/confirmDialogData';
 })
 export class ConfirmationDialogComponent {
   title: string;
-  text: string;
+  message: string;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, text: string }
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, message: string }
   ) {
     this.title = data.title;
-    this.text = data.text;
+    this.message = data.message;
   }
 
   onCancel(): void {

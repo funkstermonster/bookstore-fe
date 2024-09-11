@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { Book } from 'src/app/models/book';
 import { HttpService } from 'src/app/services/http.service';
 import { BooksTableComponent } from '../books-table/books-table.component';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-books-overview',
@@ -15,12 +15,13 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./books-overview.component.scss'],
 })
 export class BooksOverviewComponent implements OnInit {
+  private httpService = inject(HttpService);
+  private toastr = inject(ToastrService);
+
   books$: Observable<Book[]> = new Observable<Book[]>();
 
-  constructor(private httpService: HttpService, private toastr: ToastrService) {}
-
   ngOnInit(): void {
-    this.books$ = this.httpService.getBooks();
+    this.loadBooks();
   }
 
   bookColumns = [
@@ -63,21 +64,37 @@ export class BooksOverviewComponent implements OnInit {
     },
   ];
 
+  deleteDialogConfig: MatDialogConfig = {
+    width: '300px',
+    data: {
+      title: 'Confirm Deletion',
+      message:
+        'Are you sure you want to delete this item? This action cannot be undone.',
+    },
+  };
+
   onDelete(book: Book) {
-    this.httpService.deleteBook(book.id).pipe(
-      tap(() => {
-        this.toastr.success('Book deleted successfully!');
-        this.refreshBooks();
-      }),
-      catchError((err) => {
-        this.toastr.error('Error deleting book!');
-        console.error('Error deleting book', err);
-        return of([]);
-      })
-    ).subscribe();
+    this.httpService
+      .deleteBook(book.id)
+      .pipe(
+        tap(() => {
+          this.toastr.success('Book deleted successfully!');
+          this.loadBooks();
+        }),
+        catchError(() => {
+          this.toastr.error('Error deleting book!');
+          return of([]);
+        })
+      )
+      .subscribe();
   }
 
-  private refreshBooks() {
-    this.books$ = this.httpService.getBooks();
+  private loadBooks() {
+    this.books$ = this.httpService.getBooks().pipe(
+      catchError(() => {
+        this.toastr.error('Error loading books!');
+        return of([]);
+      })
+    );
   }
 }
