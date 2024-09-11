@@ -1,0 +1,66 @@
+<div>
+  <h2>Create New Book</h2>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Author</mat-label>
+      <input matInput formControlName="author">
+      <mat-error *ngIf="author.invalid && (author.dirty || author.touched)">
+        Author is required!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
+        Title is required!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Publish Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="publish_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="publish_date.invalid && (publish_date.dirty || publish_date.touched)">
+        Publish Date is required!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>ISBN</mat-label>
+      <input matInput formControlName="isbn">
+      <mat-error *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)">
+        ISBN is required!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Summary</mat-label>
+      <textarea matInput formControlName="summary"></textarea>
+      <mat-error *ngIf="summary.invalid && (summary.dirty || summary.touched)">
+        Summary is required!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number">
+      <mat-error *ngIf="price.invalid && (price.dirty || price.touched)">
+        Price is required and must be a positive number!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>On Store</mat-label>
+      <input matInput formControlName="on_store" type="number">
+      <mat-error *ngIf="on_store.invalid && (on_store.dirty || on_store.touched)">
+        On Store is required and must be a number!
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="bookForm.invalid">
+      Add Book
+    </button>
+  </form>
+</div>

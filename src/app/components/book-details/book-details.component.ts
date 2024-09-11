@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -57,32 +58,32 @@ export class BookDetailsComponent implements OnInit {
     this.initializeBookDetails();
   }
 
-  get author() {
-    return this.bookForm.get('author');
+  get author(): FormControl {
+    return this.bookForm.get('author') as FormControl;
   }
 
-  get title() {
-    return this.bookForm.get('title');
+  get title(): FormControl {
+    return this.bookForm.get('title')  as FormControl;
   }
 
-  get publish_date() {
-    return this.bookForm.get('publish_date');
+  get publish_date(): FormControl {
+    return this.bookForm.get('publish_date')  as FormControl;
   }
 
-  get isbn() {
-    return this.bookForm.get('isbn');
+  get isbn(): FormControl {
+    return this.bookForm.get('isbn')  as FormControl;
   }
 
-  get summary() {
-    return this.bookForm.get('summary');
+  get summary(): FormControl {
+    return this.bookForm.get('summary')  as FormControl;
   }
 
-  get price() {
-    return this.bookForm.get('price');
+  get price(): FormControl {
+    return this.bookForm.get('price')  as FormControl;
   }
 
-  get on_store() {
-    return this.bookForm.get('on_store');
+  get on_store(): FormControl {
+    return this.bookForm.get('on_store')  as FormControl;
   }
 
   public populateForm(book: Book) {

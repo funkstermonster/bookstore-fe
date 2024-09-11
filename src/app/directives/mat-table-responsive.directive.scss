@@ -16,7 +16,7 @@
         justify-content: space-around;
 
         & > .mat-sort-header-container {
-          padding-left: 15px; // padding is used to center the header table cells, due to the width of the sort icon
+          padding-left: 15px;
         }
 
         &:not([mat-sort-header]),
@@ -75,7 +75,6 @@
   }
 }
 
-// just for demo purpose
 td.mat-column-actions {
   text-align: right;
 }

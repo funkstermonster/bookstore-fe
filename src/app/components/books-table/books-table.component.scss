@@ -1,3 +1,8 @@
+.main-content {
+  min-height: calc(100vh - 150px); /* Adjust 150px to the height of your footer */
+  padding-bottom: 2rem; /* Ensure padding-bottom to make room for the footer */
+}
+
 table {
   width: 100%;
 }

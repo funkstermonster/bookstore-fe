@@ -7,11 +7,12 @@ import { BooksTableComponent } from '../books-table/books-table.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-books-overview',
   standalone: true,
-  imports: [CommonModule, BooksTableComponent, MatDialogModule],
+  imports: [CommonModule, BooksTableComponent, MatDialogModule, MatButtonModule],
   templateUrl: './books-overview.component.html',
   styleUrls: ['./books-overview.component.scss'],
 })
@@ -104,5 +105,9 @@ export class BooksOverviewComponent implements OnInit {
         return of([]);
       })
     );
+  }
+
+  public navigateToCreateBookPage() {
+    this.router.navigate(['/create-book']);
   }
 }

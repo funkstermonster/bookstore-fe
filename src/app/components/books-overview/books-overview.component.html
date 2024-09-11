@@ -1,3 +1,9 @@
+<div class="button-container">
+  <button mat-raised-button color="primary" (click)="navigateToCreateBookPage()">
+    Add book
+  </button>
+</div>
+
 <div *ngIf="books$ | async as books">
   <app-books-table
     [data]="books"
