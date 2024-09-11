@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatTableResponsiveDirective } from 'src/app/directives/mat-table-responsive.directive';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { ColumnDefinition } from 'src/app/models/columnDefinition';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -49,6 +49,7 @@ export class BooksTableComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(this.data);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.dataSource.data = this.data;
@@ -56,6 +57,7 @@ export class BooksTableComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   get displayedColumns(): string[] {

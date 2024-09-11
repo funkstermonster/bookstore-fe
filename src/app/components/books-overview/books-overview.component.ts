@@ -52,7 +52,9 @@ export class BooksOverviewComponent implements OnInit {
     {
       columnDef: 'summary',
       header: 'Summary',
-      cell: (element: Book) => `${element.summary?.slice(0, 30)}`,
+      cell: (element: Book) => element.summary?.length > 30 
+        ? `${element.summary.slice(0, 30)}...` 
+        : element.summary,
     },
     {
       columnDef: 'price',

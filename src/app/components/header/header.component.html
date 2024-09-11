@@ -4,12 +4,20 @@
       <a routerLink="home">Bookstore</a>
     </div>
 
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="mobile-menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
     <nav class="nav">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="home">Home</button>
+        <button mat-menu-item routerLink="books">Books</button>
+      </mat-menu>
+
       <ul>
         <li><a routerLink="home">Home</a></li>
         <li><a routerLink="books">Books</a></li>
       </ul>
     </nav>
-    
   </div>
 </header>

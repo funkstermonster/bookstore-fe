@@ -26,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.scss'],
@@ -40,7 +40,6 @@ export class BookDetailsComponent implements OnInit {
   private fb = inject(FormBuilder);
   private httpService = inject(HttpService);
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private toastr = inject(ToastrService);
 
   constructor() {
@@ -115,25 +114,27 @@ export class BookDetailsComponent implements OnInit {
         }
         this.isEditMode = false;
       },
-      error: () => this.toastr.error('Failed to load book details'),
+      error: () => {
+        this.toastr.error('Failed to load book details!');
+      },
     });
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.bookForm.invalid) {
       return;
     }
 
     this.httpService.updateBook(this.bookId, this.bookForm.value).subscribe({
       next: () => {
-        this.toastr.success('Book updated successfully');
-        this.router.navigate(['/books-overview']);
+        this.toastr.success('Book updated successfully!');
+        this.toggleEditMode(false);
       },
-      error: () => this.toastr.error('Failed to update book'),
+      error: () => this.toastr.error('Failed to update book!'),
     });
   }
 
-  toggleEditMode(edit: boolean): void {
+  public toggleEditMode(edit: boolean): void {
     this.isEditMode = edit;
     if (!edit) {
       this.initializeBookDetails();

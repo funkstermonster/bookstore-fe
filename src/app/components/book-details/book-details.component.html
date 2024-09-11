@@ -1,47 +1,64 @@
 <div *ngIf="book$ | async as book;">
+  <h2 class="form-title">Book Details</h2>
   <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
       <mat-label>Author</mat-label>
-      <input matInput formControlName="author" [readonly]="!isEditMode">
+      <input matInput formControlName="author" [readonly]="!isEditMode" />
       <mat-error *ngIf="author?.invalid && isEditMode">Author is required!</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
-      <input matInput formControlName="title" [readonly]="!isEditMode">
+      <input matInput formControlName="title" [readonly]="!isEditMode" />
       <mat-error *ngIf="title?.invalid && isEditMode">Title is required!</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Publish Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="publish_date" [readonly]="!isEditMode">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="publish_date"
+        [readonly]="!isEditMode"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="publish_date?.invalid && isEditMode">Publish Date is required!</mat-error>
+      <mat-error *ngIf="publish_date?.invalid && isEditMode">
+        Publish Date is required!
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>ISBN</mat-label>
-      <input matInput formControlName="isbn" [readonly]="!isEditMode">
+      <input matInput formControlName="isbn" [readonly]="!isEditMode" />
       <mat-error *ngIf="isbn?.invalid && isEditMode">ISBN is required!</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Summary</mat-label>
-      <textarea matInput formControlName="summary" [readonly]="!isEditMode"></textarea>
+      <textarea
+        class="textarea"
+        matInput
+        formControlName="summary"
+        [readonly]="!isEditMode"
+      ></textarea>
       <mat-error *ngIf="summary?.invalid && isEditMode">Summary is required!</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Price</mat-label>
-      <input matInput formControlName="price" type="number" [readonly]="!isEditMode">
-      <mat-error *ngIf="price?.invalid && isEditMode">Price is required and must be a positive number!</mat-error>
+      <input matInput formControlName="price" type="number" [readonly]="!isEditMode" />
+      <mat-error *ngIf="price?.invalid && isEditMode">
+        Price is required and must be a positive number!
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>On Store</mat-label>
-      <input matInput formControlName="on_store" type="number" [readonly]="!isEditMode">
-      <mat-error *ngIf="on_store?.invalid && isEditMode">On Store is required and must be a number!</mat-error>
+      <input matInput formControlName="on_store" type="number" [readonly]="!isEditMode" />
+      <mat-error *ngIf="on_store?.invalid && isEditMode">
+        On Store is required and must be a number!
+      </mat-error>
     </mat-form-field>
 
     <div *ngIf="isEditMode">
@@ -49,6 +66,8 @@
       <button mat-button type="button" (click)="toggleEditMode(false)">Cancel</button>
     </div>
 
-    <button *ngIf="!isEditMode" mat-raised-button color="primary" type="button" (click)="toggleEditMode(true)">Edit</button>
+    <button *ngIf="!isEditMode" mat-raised-button color="primary" type="button" (click)="toggleEditMode(true)">
+      Edit
+    </button>
   </form>
 </div>
