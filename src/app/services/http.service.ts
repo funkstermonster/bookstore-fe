@@ -15,7 +15,7 @@ export class HttpService {
     return this.http.get<Book[]>(this.apiUrl);
   }
 
-  public getBook(id: number): Observable<Book> {
+  public getBook(id: string): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/${id}`);
   }
 
@@ -23,7 +23,7 @@ export class HttpService {
     return this.http.post<Book>(this.apiUrl, book);
   }
 
-  public updateBook(id: number, book: Book): Observable<Book> {
+  public updateBook(id: string, book: Book): Observable<Book> {
     return this.http.put<Book>(`${this.apiUrl}/${id}`, book);
   }
 

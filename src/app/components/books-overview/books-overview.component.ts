@@ -6,6 +6,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { BooksTableComponent } from '../books-table/books-table.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books-overview',
@@ -17,6 +18,7 @@ import { MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 export class BooksOverviewComponent implements OnInit {
   private httpService = inject(HttpService);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   books$: Observable<Book[]> = new Observable<Book[]>();
 
@@ -73,7 +75,7 @@ export class BooksOverviewComponent implements OnInit {
     },
   };
 
-  onDelete(book: Book) {
+  public onDelete(book: Book) {
     this.httpService
       .deleteBook(book.id)
       .pipe(
@@ -87,6 +89,10 @@ export class BooksOverviewComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+  
+  public navigateBookDetailPage(book: Book) {
+    return this.router.navigate(['/book-details', book.id]);
   }
 
   private loadBooks() {

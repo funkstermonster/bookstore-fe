@@ -18,7 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { ColumnDefinition } from 'src/app/models/columnDefinition';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { Book } from 'src/app/models/book';
 import { ConfirmDialogData } from 'src/app/models/confirmDialogData';
 
 @Component({
@@ -39,11 +38,13 @@ import { ConfirmDialogData } from 'src/app/models/confirmDialogData';
 export class BooksTableComponent implements OnInit {
   private dialog = inject(MatDialog);
 
+
   @Input() data: any[] = [];
   @Input() columnDefinitions: ColumnDefinition[] = [];
   @Input() deleteDialogConfig: MatDialogConfig<ConfirmDialogData> =
     new MatDialogConfig<ConfirmDialogData>();
   @Output() delete = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<any>();
 
   dataSource = new MatTableDataSource<any>(this.data);
 
@@ -62,7 +63,7 @@ export class BooksTableComponent implements OnInit {
   }
 
   onEdit(element: any) {
-    console.log('Edit clicked', element);
+    this.edit.emit(element);
   }
 
   public onDelete(element: any): void {

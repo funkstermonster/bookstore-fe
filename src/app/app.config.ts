@@ -10,7 +10,7 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
 export const router: Routes = [
   { path: "home", component: HomeComponent },
   { path: "books", component: BooksOverviewComponent },
-  { path: "book-details", component: BookDetailsComponent },
+  { path: "book-details/:id", component: BookDetailsComponent },
   { path: "**", redirectTo: "home", pathMatch: 'full' }
 ];
 export const appConfig: ApplicationConfig = {

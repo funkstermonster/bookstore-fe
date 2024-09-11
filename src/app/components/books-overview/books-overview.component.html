@@ -1,3 +1,9 @@
 <div *ngIf="books$ | async as books">
-  <app-books-table [data]="books" [columnDefinitions]="bookColumns" [deleteDialogConfig]="deleteDialogConfig" (delete)="onDelete($event)"></app-books-table>
+  <app-books-table
+    [data]="books"
+    [columnDefinitions]="bookColumns"
+    [deleteDialogConfig]="deleteDialogConfig"
+    (delete)="onDelete($event)"
+    (edit)="navigateBookDetailPage($event)"
+  ></app-books-table>
 </div>
