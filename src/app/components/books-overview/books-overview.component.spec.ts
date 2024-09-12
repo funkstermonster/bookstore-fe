@@ -20,8 +20,14 @@ describe('BooksOverviewComponent', () => {
   let router: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    const httpSpy = jasmine.createSpyObj('HttpService', ['getBooks', 'deleteBook']);
-    const toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
+    const httpSpy = jasmine.createSpyObj('HttpService', [
+      'getBooks',
+      'deleteBook',
+    ]);
+    const toastrSpy = jasmine.createSpyObj('ToastrService', [
+      'success',
+      'error',
+    ]);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     // Mock observables for the service methods
@@ -36,13 +42,13 @@ describe('BooksOverviewComponent', () => {
         MatDialogModule,
         MatButtonModule,
         RouterTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
       providers: [
         { provide: HttpService, useValue: httpSpy },
         { provide: ToastrService, useValue: toastrSpy },
-        { provide: Router, useValue: routerSpy }
-      ]
+        { provide: Router, useValue: routerSpy },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BooksOverviewComponent);
@@ -57,10 +63,28 @@ describe('BooksOverviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load books on init', () => {
+  it('should load books on init', (done) => {
     const mockBooks: Book[] = [
-      { id: '1', author: 'Author 1', title: 'Title 1', publish_date: '2023-01-01', isbn: '1234567890', summary: 'Summary 1', price: 19.99, on_store: 10 },
-      { id: '2', author: 'Author 2', title: 'Title 2', publish_date: '2023-02-01', isbn: '0987654321', summary: 'Summary 2', price: 29.99, on_store: 5 }
+      {
+        id: '1',
+        author: 'Author 1',
+        title: 'Title 1',
+        publish_date: '2023-01-01',
+        isbn: '1234567890',
+        summary: 'Summary 1',
+        price: 19.99,
+        on_store: 10,
+      },
+      {
+        id: '2',
+        author: 'Author 2',
+        title: 'Title 2',
+        publish_date: '2023-02-01',
+        isbn: '0987654321',
+        summary: 'Summary 2',
+        price: 29.99,
+        on_store: 5,
+      },
     ];
 
     httpService.getBooks.and.returnValue(of(mockBooks));
@@ -68,56 +92,94 @@ describe('BooksOverviewComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    component.books$.subscribe(books => {
+    component.books$.subscribe((books) => {
       expect(books).toEqual(mockBooks);
+      done();
     });
   });
 
-  it('should handle error when loading books', () => {
-    httpService.getBooks.and.returnValue(throwError(() => new Error('Error loading books')));
+  it('should handle error when loading books', (done) => {
+    httpService.getBooks.and.returnValue(
+      throwError(() => new Error('Error loading books'))
+    );
 
     component.ngOnInit();
     fixture.detectChanges();
 
-    expect(toastr.error).toHaveBeenCalledWith('Error loading books!');
+    fixture.whenStable().then(() => {
+      expect(toastr.error).toHaveBeenCalledWith('Error loading books!');
+      done();
+    });
   });
 
-  it('should delete a book and reload books on success', () => {
-    const mockBook: Book = { id: '1', author: 'Author 1', title: 'Title 1', publish_date: '2023-01-01', isbn: '1234567890', summary: 'Summary 1', price: 19.99, on_store: 10 };
+  it('should delete a book and reload books on success', (done) => {
+    const mockBook: Book = {
+      id: '1',
+      author: 'Author 1',
+      title: 'Title 1',
+      publish_date: '2023-01-01',
+      isbn: '1234567890',
+      summary: 'Summary 1',
+      price: 19.99,
+      on_store: 10,
+    };
 
     httpService.deleteBook.and.returnValue(of(void 0));
     httpService.getBooks.and.returnValue(of([]));
 
     component.onDelete(mockBook);
 
-    // Use `fixture.whenStable()` to wait for async operations
     fixture.whenStable().then(() => {
       expect(httpService.deleteBook).toHaveBeenCalledWith(mockBook.id);
       expect(toastr.success).toHaveBeenCalledWith('Book deleted successfully!');
       expect(httpService.getBooks).toHaveBeenCalled();
+      done();
     });
   });
 
-  it('should handle error when deleting a book', () => {
-    const mockBook: Book = { id: '1', author: 'Author 1', title: 'Title 1', publish_date: '2023-01-01', isbn: '1234567890', summary: 'Summary 1', price: 19.99, on_store: 10 };
+  it('should handle error when deleting a book', (done) => {
+    const mockBook: Book = {
+      id: '1',
+      author: 'Author 1',
+      title: 'Title 1',
+      publish_date: '2023-01-01',
+      isbn: '1234567890',
+      summary: 'Summary 1',
+      price: 19.99,
+      on_store: 10,
+    };
 
-    httpService.deleteBook.and.returnValue(throwError(() => new Error('Error deleting book')));
+    httpService.deleteBook.and.returnValue(
+      throwError(() => new Error('Error deleting book'))
+    );
 
     component.onDelete(mockBook);
 
-    // Use `fixture.whenStable()` to wait for async operations
     fixture.whenStable().then(() => {
       expect(httpService.deleteBook).toHaveBeenCalledWith(mockBook.id);
       expect(toastr.error).toHaveBeenCalledWith('Error deleting book!');
+      done();
     });
   });
 
   it('should navigate to book details page', () => {
-    const mockBook: Book = { id: '1', author: 'Author 1', title: 'Title 1', publish_date: '2023-01-01', isbn: '1234567890', summary: 'Summary 1', price: 19.99, on_store: 10 };
+    const mockBook: Book = {
+      id: '1',
+      author: 'Author 1',
+      title: 'Title 1',
+      publish_date: '2023-01-01',
+      isbn: '1234567890',
+      summary: 'Summary 1',
+      price: 19.99,
+      on_store: 10,
+    };
 
     component.navigateBookDetailPage(mockBook);
 
-    expect(router.navigate).toHaveBeenCalledWith(['/book-details', mockBook.id]);
+    expect(router.navigate).toHaveBeenCalledWith([
+      '/book-details',
+      mockBook.id,
+    ]);
   });
 
   it('should navigate to create book page', () => {
