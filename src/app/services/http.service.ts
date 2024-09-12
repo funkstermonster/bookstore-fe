@@ -27,7 +27,7 @@ export class HttpService {
     return this.http.put<Book>(`${this.apiUrl}/${id}`, book);
   }
 
-  public deleteBook(id: number) {
+  public deleteBook(id: string) {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
