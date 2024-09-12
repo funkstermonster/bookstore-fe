@@ -1,27 +1,105 @@
-# BookstoreFe
+# BookStore Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.15.
+## Overview
 
-## Development server
+This is a standalone Angular 16 application for managing a bookstore. The application supports CRUD operations for books and uses Angular Material for UI components. It includes features for adding, viewing, editing, and deleting books.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- **Book Management**: Create, view, update, and delete books.
+- **Book List**: Display books in a responsive Angular Material table with pagination.
+- **Book Details**: View and edit book details using reactive forms.
+- **Reusable Components**: Modular and reusable components for various functionalities.
+- **Confirmation Dialog**: Reusable dialog component for confirmation.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Components
 
-## Build
+### `BookCreateComponent`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Purpose**: Add a new book.
 
-## Running unit tests
+### `BookDetailsComponent`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Purpose**: View and edit book details.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### `BooksOverviewComponent`
 
-## Further help
+- **Purpose**: Display a list of books in a table.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+### `BooksTableComponent`
+
+- **Purpose**: A reusable table component for displaying books with actions.
+
+
+### `ConfirmationDialogComponent`
+
+- **Purpose**: Reusable confirmation dialog for delete actions.
+
+## Services
+
+### `HttpService`
+
+- **Purpose**: Handle HTTP requests related to books.
+- **Path**: `src/app/services/http.service.ts`
+- **Methods**:
+  - `getBooks()`: Fetch all books.
+  - `getBook(id: string)`: Fetch a book by ID.
+  - `addBook(book: Book)`: Add a new book.
+  - `updateBook(id: string, book: Book)`: Update an existing book.
+  - `deleteBook(id: string)`: Delete a book.
+
+## Models
+
+### `Book`
+
+- **Description**: Represents a book entity.
+- **Path**: `src/app/models/book.model.ts`
+- **Fields**:
+  - `id`: Unique identifier.
+  - `author`: Author of the book.
+  - `title`: Title of the book.
+  - `publish_date`: Publication date.
+  - `isbn`: ISBN number.
+  - `summary`: Summary of the book.
+  - `price`: Price.
+  - `on_store`: Stock availability.
+  - `created_at` (optional): Creation timestamp.
+  - `updated_at` (optional): Last update timestamp.
+
+### `ColumnDefinition`
+
+- **Description**: Defines the structure of table columns.
+- **Path**: `src/app/models/column-definition.model.ts`
+- **Fields**:
+  - `columnDef`: Column definition name.
+  - `header`: Header text.
+  - `cell`: Function to get the cell value.
+
+### `ConfirmDialogData`
+
+- **Description**: Data used in confirmation dialogs.
+- **Path**: `src/app/models/confirm-dialog-data.model.ts`
+- **Fields**:
+  - `title`: Dialog title.
+  - `message`: Dialog message.
+  - `confirmText`: Text for the confirm button.
+  - `cancelText`: Text for the cancel button.
+
+## Directives
+
+### `MatTableResponsiveDirective`
+
+- **Purpose**: Makes Material tables responsive.
+- **Path**: `src/app/directives/mat-table-responsive.directive.ts`
+
+### Routes Configuration
+
+- **Path**: `src/app.config.ts`
+- **Routes**:
+  - `home`: Displays the home page.
+  - `books`: Displays the list of books.
+  - `book-details/:id`: Displays details of a specific book.
+  - `create-book`: Allows creation of a new book.
+  - `**`: Redirects to the home page for unknown routes.
