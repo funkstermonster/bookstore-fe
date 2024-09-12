@@ -89,7 +89,7 @@ onSubmit(): void {
   this.addBook(newBook).subscribe({
     next: () => {
       this.toastr.success('Book added successfully');
-      this.router.navigate(['/books-overview']);
+      this.router.navigate(['/books']);
     },
     error: () => this.toastr.error('Failed to add book'),
   });
