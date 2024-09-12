@@ -4,7 +4,6 @@ import { HttpService } from 'src/app/services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { BookCreateComponent } from './book-create.component';
 import { of, throwError } from 'rxjs';
-import { Book } from 'src/app/models/book';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { BooksOverviewComponent } from '../books-overview/books-overview.component';
 
 describe('BookCreateComponent', () => {
   let component: BookCreateComponent;
@@ -34,7 +34,7 @@ describe('BookCreateComponent', () => {
         MatButtonModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        RouterTestingModule.withRoutes([]), // Use RouterTestingModule without custom routes
+        RouterTestingModule.withRoutes([ { path: 'books', component: BooksOverviewComponent }]),
         BrowserAnimationsModule,
         MatDialogModule
       ],
