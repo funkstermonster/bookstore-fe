@@ -1,8 +1,7 @@
 <div class="main-content">
-  <!-- Your table and other content here -->
   <div class="mat-elevation-z8">
     <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Dynamic Column Headers and Cells -->
+      <!-- Column Headers and Cells -->
       <ng-container *ngFor="let column of columnDefinitions" [matColumnDef]="column.columnDef">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column.header}} </th>
         <td mat-cell *matCellDef="let element"> {{column.cell(element)}} </td>

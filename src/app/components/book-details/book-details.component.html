@@ -1,4 +1,4 @@
-<div *ngIf="book$ | async as book;">
+<div *ngIf="book$ | async as book;" class="book-details-container">
   <h2 class="form-title">Book Details</h2>
   <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
