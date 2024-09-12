@@ -54,7 +54,6 @@ describe('BooksTableComponent', () => {
 
     dialog.open.and.returnValue(dialogRefSpy);
 
-    // Ensure deleteDialogConfig includes only title and message
     component.deleteDialogConfig = {
       data: {
         title: 'Confirm Delete',
