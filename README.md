@@ -4,6 +4,13 @@
 
 This is a standalone Angular 16 application for managing a bookstore. The application supports CRUD operations for books and uses Angular Material for UI components. It includes features for adding, viewing, editing, and deleting books.
 
+## Run
+To install the dependencies that this application uses please run this command:  
+`npm install`
+
+After that run the application with this command:  
+`ng serve`
+
 ## Features
 
 - **Book Management**: Create, view, update, and delete books.
@@ -36,6 +43,20 @@ This is a standalone Angular 16 application for managing a bookstore. The applic
 ### `ConfirmationDialogComponent`
 
 - **Purpose**: Reusable confirmation dialog for delete actions.
+
+### `HomeComponent`
+
+- **Purpose**: This is an entry point for the application.
+
+### `HeaderComponent`
+
+- **Purpose**: This is the header with two menu entires: Home and Books. 'Home' navigates to the welcome page and 'Books' navigates to the book's overview page.
+
+### `FooterComponent`
+
+- **Purpose**: This is a footer with placeholders, like: Privacy Policy, Terms of Service, Contact Us.
+
+
 
 ## Services
 
