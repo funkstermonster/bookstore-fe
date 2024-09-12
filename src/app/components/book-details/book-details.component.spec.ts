@@ -122,15 +122,6 @@ describe('BookDetailsComponent', () => {
   
 
   it('should handle updateBook error', () => {
-    const mockBook: any = {
-      author: 'J.K. Rowling',
-      title: 'Harry Potter',
-      publish_date: new Date('1997-06-26').toISOString(),
-      isbn: '978-0747532743',
-      summary: 'A young wizard\'s journey.',
-      price: 19.99,
-      on_store: 10
-    };
   
     // Set up the form with valid data
     component.bookForm.setValue({
