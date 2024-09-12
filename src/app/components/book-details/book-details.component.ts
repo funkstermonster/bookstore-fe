@@ -63,27 +63,27 @@ export class BookDetailsComponent implements OnInit {
   }
 
   get title(): FormControl {
-    return this.bookForm.get('title')  as FormControl;
+    return this.bookForm.get('title') as FormControl;
   }
 
   get publish_date(): FormControl {
-    return this.bookForm.get('publish_date')  as FormControl;
+    return this.bookForm.get('publish_date') as FormControl;
   }
 
   get isbn(): FormControl {
-    return this.bookForm.get('isbn')  as FormControl;
+    return this.bookForm.get('isbn') as FormControl;
   }
 
   get summary(): FormControl {
-    return this.bookForm.get('summary')  as FormControl;
+    return this.bookForm.get('summary') as FormControl;
   }
 
   get price(): FormControl {
-    return this.bookForm.get('price')  as FormControl;
+    return this.bookForm.get('price') as FormControl;
   }
 
   get on_store(): FormControl {
-    return this.bookForm.get('on_store')  as FormControl;
+    return this.bookForm.get('on_store') as FormControl;
   }
 
   public populateForm(book: Book) {
@@ -125,7 +125,6 @@ export class BookDetailsComponent implements OnInit {
     if (this.bookForm.invalid) {
       return;
     }
-
     this.httpService.updateBook(this.bookId, this.bookForm.value).subscribe({
       next: () => {
         this.toastr.success('Book updated successfully!');

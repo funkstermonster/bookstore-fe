@@ -11,7 +11,7 @@ import { map, mapTo, takeUntil } from 'rxjs/operators';
 
 @Directive({
   selector: '[matTableResponsive]',
-  standalone: true
+  standalone: true,
 })
 export class MatTableResponsiveDirective
   implements OnInit, AfterViewInit, OnDestroy
@@ -53,10 +53,10 @@ export class MatTableResponsiveDirective
       .pipe(
         mapTo({ headRow: this.thead.rows.item(0)!, bodyRows: this.tbody.rows }),
         map(({ headRow, bodyRows }) => ({
-          columnNames: [...(headRow.children)].map(
+          columnNames: [...headRow.children].map(
             (headerCell) => headerCell.textContent!
           ),
-          rows: [...(bodyRows)].map((row) => [...row.children]),
+          rows: [...bodyRows].map((row) => [...row.children]),
         })),
         takeUntil(this.onDestroy$)
       )

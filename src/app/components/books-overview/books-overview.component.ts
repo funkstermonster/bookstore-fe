@@ -12,7 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-books-overview',
   standalone: true,
-  imports: [CommonModule, BooksTableComponent, MatDialogModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    BooksTableComponent,
+    MatDialogModule,
+    MatButtonModule,
+  ],
   templateUrl: './books-overview.component.html',
   styleUrls: ['./books-overview.component.scss'],
 })
@@ -53,9 +58,10 @@ export class BooksOverviewComponent implements OnInit {
     {
       columnDef: 'summary',
       header: 'Summary',
-      cell: (element: Book) => element.summary?.length > 30 
-        ? `${element.summary.slice(0, 30)}...` 
-        : element.summary,
+      cell: (element: Book) =>
+        element.summary?.length > 30
+          ? `${element.summary.slice(0, 30)}...`
+          : element.summary,
     },
     {
       columnDef: 'price',
@@ -93,7 +99,7 @@ export class BooksOverviewComponent implements OnInit {
       )
       .subscribe();
   }
-  
+
   public navigateBookDetailPage(book: Book) {
     return this.router.navigate(['/book-details', book.id]);
   }

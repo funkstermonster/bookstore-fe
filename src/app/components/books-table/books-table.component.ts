@@ -38,7 +38,6 @@ import { ConfirmDialogData } from 'src/app/models/confirmDialogData';
 export class BooksTableComponent implements OnInit {
   private dialog = inject(MatDialog);
 
-
   @Input() data: any[] = [];
   @Input() columnDefinitions: ColumnDefinition[] = [];
   @Input() deleteDialogConfig: MatDialogConfig<ConfirmDialogData> =
