@@ -57,7 +57,6 @@ After that run the application with this command:
 - **Purpose**: This is a footer with placeholders, like: Privacy Policy, Terms of Service, Contact Us.
 
 
-
 ## Services
 
 ### `HttpService`
