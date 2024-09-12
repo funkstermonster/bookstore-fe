@@ -5,7 +5,7 @@
 This is a standalone Angular 16 application for managing a bookstore. The application supports CRUD operations for books and uses Angular Material for UI components. It includes features for adding, viewing, editing, and deleting books.
 
 ## Run
-To install the dependencies that this application uses please run this command:  
+To install the dependencies that this application uses, please run this command:  
 `npm install`
 
 After that run the application with this command:  
